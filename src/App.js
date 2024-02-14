@@ -1,6 +1,6 @@
+import { useState } from "react";
 import AppLayout from "./components/AppLayout";
 import Header from "./components/Header";
-import JobItem from "./components/JobItem";
 import JobList from "./components/JobList";
 import SearchBar from "./components/SearchBar";
 
@@ -160,12 +160,30 @@ const data = [
 console.log(data);
 
 function App() {
+  const [searchItems, setSearchItems] = useState([]);
+
+  // function handleAddSearchitem(item) {
+  //   setSearchItems((searchItems) => [...searchItems, item]);
+  // }
+
+  function handleAddSearchitem(jobs) {
+    // setSearchItems((searchItems) => [...searchItems, jobs.filter(job => job.)]);
+  }
+
+  function handleClear() {
+    setSearchItems([]);
+  }
+
   return (
-    <div>
+    <div className="flex flex-col items-center bg-gray-50 lg:bg-blue-300">
       <Header />
       <AppLayout>
-        <SearchBar />
-        <JobList jobs={data} />
+        <SearchBar searchItems={searchItems} onHandleClear={handleClear} />
+        <JobList
+          jobs={data}
+          searchItems={searchItems}
+          onHandleAddSearchitem={handleAddSearchitem}
+        />
       </AppLayout>
     </div>
   );

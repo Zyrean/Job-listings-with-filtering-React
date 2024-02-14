@@ -1,5 +1,7 @@
 function AppLayout({ children }) {
-  return <div className="bg-red-100 px-8">{children}</div>;
+  return (
+    <div className="max-w-sm px-8 pb-6 pt-24 lg:bg-red-100">{children}</div>
+  );
 }
 
 export default AppLayout;
