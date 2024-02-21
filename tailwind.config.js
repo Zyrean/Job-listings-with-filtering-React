@@ -1,17 +1,10 @@
 /** @type {import('tailwindcss').Config} */
-// eslint-disable-next-line
-export default {
+module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    fontFamily: {
-      sans: "Roboto Mono, monospace",
-    },
-
-    extend: {
-      backgroundImage: {
-        // "header-texture": "url(`/src/images/bg-header-mobile.svg`)",
-      },
-    },
+    extend: {},
   },
   plugins: [],
 };
+
+// bg-[url('../../public/images/account.svg')]

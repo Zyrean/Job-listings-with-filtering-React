@@ -8,7 +8,7 @@ const data = [
   {
     id: 1,
     company: "Photosnap",
-    logo: "./images/photosnap.svg",
+    logo: "../../public/images/photosnap.svg",
     new: true,
     featured: true,
     position: "Senior Frontend Developer",
@@ -160,15 +160,20 @@ const data = [
 console.log(data);
 
 function App() {
+  const jobs = [...data];
   const [searchItems, setSearchItems] = useState([]);
 
-  // function handleAddSearchitem(item) {
-  //   setSearchItems((searchItems) => [...searchItems, item]);
-  // }
-
-  function handleAddSearchitem(jobs) {
-    // setSearchItems((searchItems) => [...searchItems, jobs.filter(job => job.)]);
+  function handleAddSearchitem(item) {
+    setSearchItems((searchItems) => [...searchItems, item]);
   }
+
+  // function handleAddSearchitem(text) {
+  //   setSearchItems((searchItems) => [
+  //     ...searchItems,
+  //     jobs.filter((job) => job.role === "Frontend"),
+  //   ]);
+  //   console.log(searchItems);
+  // }
 
   function handleClear() {
     setSearchItems([]);
@@ -180,7 +185,7 @@ function App() {
       <AppLayout>
         <SearchBar searchItems={searchItems} onHandleClear={handleClear} />
         <JobList
-          jobs={data}
+          jobs={jobs}
           searchItems={searchItems}
           onHandleAddSearchitem={handleAddSearchitem}
         />

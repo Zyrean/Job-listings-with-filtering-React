@@ -1,11 +1,9 @@
 import SearchItem from "./SearchItem";
 
-// const test = ["frontend", "CSS", "JavaScript", "frontend"];
-
 function SearchBar({ searchItems, onHandleClear }) {
   return (
-    <>
-      <div className="absolute top-24 z-20 flex max-w-xs justify-between rounded-md bg-white px-5 py-5 shadow-lg">
+    <div className="">
+      <div className="absolute top-24 z-20 flex max-w-xs justify-between rounded-md bg-white px-5 py-5 shadow-lg lg:max-w-full">
         <div className="flex w-96 flex-wrap gap-3 lg:flex-nowrap">
           {searchItems.map((ele) => (
             <SearchItem ele={ele} />
@@ -18,7 +16,7 @@ function SearchBar({ searchItems, onHandleClear }) {
           Clear
         </button>
       </div>
-    </>
+    </div>
   );
 }
 
