@@ -1,9 +1,6 @@
-import { useState } from "react";
-import AppLayout from "./components/AppLayout";
-import Header from "./components/Header";
-import JobList from "./components/JobList";
-import SearchBar from "./components/SearchBar";
-import { useJobs } from "./context/JobContext";
+const { createContext, useReducer, useContext } = require("react");
+
+const JobContext = createContext();
 
 const data = [
   {
@@ -158,41 +155,36 @@ const data = [
   },
 ];
 
-function App() {
-  const { jobs } = useJobs();
-  // const jobs = [...data];
-  console.log(jobs);
-  const [searchItems, setSearchItems] = useState([]);
+const initialState = {
+  jobs: data,
+};
 
-  function handleAddSearchitem(item) {
-    setSearchItems((searchItems) => [...searchItems, item]);
+console.log(initialState.jobs);
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 0:
+      return "hello";
+
+    default:
+      throw new Error("Action type not found");
   }
-
-  // function handleAddSearchitem(text) {
-  //   setSearchItems((searchItems) => [
-  //     ...searchItems,
-  //     jobs.filter((job) => job.role === "Frontend"),
-  //   ]);
-  //   console.log(searchItems);
-  // }
-
-  function handleClear() {
-    setSearchItems([]);
-  }
-
-  return (
-    <div className="flex flex-col items-center bg-gray-50 lg:bg-blue-300">
-      <Header />
-      <AppLayout>
-        <SearchBar searchItems={searchItems} onHandleClear={handleClear} />
-        <JobList
-          jobs={jobs}
-          searchItems={searchItems}
-          onHandleAddSearchitem={handleAddSearchitem}
-        />
-      </AppLayout>
-    </div>
-  );
 }
 
-export default App;
+function JobProvider({ children }) {
+  const { jobs } = useReducer(reducer, initialState);
+  console.log(jobs);
+
+  return <JobContext.Provider value={{ jobs }}>{children}</JobContext.Provider>;
+}
+
+function useJobs() {
+  const context = useContext(JobContext);
+
+  if (context === undefined)
+    throw new Error("JobContext used outside of JobProvider");
+
+  return context;
+}
+
+export { JobProvider, useJobs };
